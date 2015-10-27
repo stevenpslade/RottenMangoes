@@ -26,8 +26,11 @@
     <%= f.number_field :runtime_in_minutes %>
   </div>
   <div>
-    <%= f.label :poster_image_url %><br>
-    <%= f.text_field :poster_image_url %>
+    <%= f.file_field :image %>
+  </div>
+  <div>
+    <%= f.label :remote_image_url, "or image URL" %><br>
+    <%= f.text_field :remote_image_url %>
   </div>
   <div>
     <%= f.label :description %><br>
