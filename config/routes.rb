@@ -1,16 +1,12 @@
-Rails.application.routes.draw do
-  
-  get 'sessions/new'
+RottenMangoes::Application.routes.draw do
 
-  get 'sessions/create'
+      resources :movies do
+        resources :reviews, only: [:new, :create]
+      end
+      resources :users, only: [:new, :create]
+      resources :sessions, only: [:new, :create, :destroy]
 
-  get 'users/new'
-
-  get 'users/create'
-
-  resources :movies
-  resources :users, only: [:new, :create]
-  resources :sessions, only: [:new, :create, :destroy]
+    end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -66,4 +62,3 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end
