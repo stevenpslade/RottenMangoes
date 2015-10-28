@@ -46,5 +46,6 @@ group :development do
 
   gem "rmagick"
   gem "carrierwave"
+  gem 'kaminari'
 end
 

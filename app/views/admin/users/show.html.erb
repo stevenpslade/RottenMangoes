@@ -1,0 +1,8 @@
+<%= link_to "Back to Admin Page", admin_users_path %><br/>
+
+  <h2><%= @user.firstname %> <%= @user.lastname %></h2>
+  <h3><%= @user.email %></h3>
+  <% if @user.admin %>
+    <h3>Administrator</h3>
+  <% end %>
+  <p>Created: <%= @user.created_at %></p>
