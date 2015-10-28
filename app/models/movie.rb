@@ -29,34 +29,31 @@ class Movie < ActiveRecord::Base
     end
   end
 
-  def self.search_title(movies, params)
-    if params != nil
-      movies.where("title like ?", "%#{params}%")
+  def self.search_title(title)
+    return all if title.blank? #implicit returns
+    where("title like ?", "%#{title}%")
+  end
+
+  def self.search_director(director)
+    if !director.blank?
+      where("director like ?", "%#{director}%")
     else
-      movies
+      all  # don't apply any filters
     end
   end
 
-  def self.search_director(movies, params)
-    if params != nil
-      movies.where("director like ?", "%#{params}%")
-    else
-      movies
-    end
-  end
-
-  def self.filter_by_runtime(movies, params)
-    if params != nil
-      case params
+  def self.filter_by_runtime(runtime_label)
+    if !runtime_label.blank?
+      case runtime_label
         when "under90"
-          movies.where("runtime_in_minutes < ?", 90)
+          where("runtime_in_minutes < ?", 90)
         when "between90and120"
-          movies.where("runtime_in_minutes >= ? AND runtime_in_minutes <= ?", 90, 120)
+          where("runtime_in_minutes >= ? AND runtime_in_minutes <= ?", 90, 120)
         when "over120"
-          movies.where("runtime_in_minutes > ?", 120)
+          where("runtime_in_minutes > ?", 120)
       end
     else
-      movies
+      all
     end
   end
 

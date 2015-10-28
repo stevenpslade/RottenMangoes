@@ -6,3 +6,4 @@
     <h3>Administrator</h3>
   <% end %>
   <p>Created: <%= @user.created_at %></p>
+  <p><%= link_to "delete", admin_users_path(@movie), method: :delete, confirm: "You sure?" %></p>
