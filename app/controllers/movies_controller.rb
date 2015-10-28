@@ -2,8 +2,9 @@
 
       def index
         @movies = Movie.all
+        @movies = @movies.search_title(params[:title]).search_director(params[:director]).filter_by_runtime(params[:runtime])
       end
-
+     
       def show
         @movie = Movie.find(params[:id])
       end

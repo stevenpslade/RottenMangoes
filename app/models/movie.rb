@@ -29,6 +29,34 @@ class Movie < ActiveRecord::Base
     end
   end
 
+  def self.search_title(title)
+    return all if title.blank? #implicit returns
+    where("title like ?", "%#{title}%")
+  end
+
+  def self.search_director(director)
+    if !director.blank?
+      where("director like ?", "%#{director}%")
+    else
+      all  # don't apply any filters
+    end
+  end
+
+  def self.filter_by_runtime(runtime_label)
+    if !runtime_label.blank?
+      case runtime_label
+        when "under90"
+          where("runtime_in_minutes < ?", 90)
+        when "between90and120"
+          where("runtime_in_minutes >= ? AND runtime_in_minutes <= ?", 90, 120)
+        when "over120"
+          where("runtime_in_minutes > ?", 120)
+      end
+    else
+      all
+    end
+  end
+
   protected
 
   def release_date_is_in_the_future
