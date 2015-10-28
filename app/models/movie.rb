@@ -29,6 +29,37 @@ class Movie < ActiveRecord::Base
     end
   end
 
+  def self.search_title(movies, params)
+    if params != nil
+      movies.where("title like ?", "%#{params}%")
+    else
+      movies
+    end
+  end
+
+  def self.search_director(movies, params)
+    if params != nil
+      movies.where("director like ?", "%#{params}%")
+    else
+      movies
+    end
+  end
+
+  def self.filter_by_runtime(movies, params)
+    if params != nil
+      case params
+        when "under90"
+          movies.where("runtime_in_minutes < ?", 90)
+        when "between90and120"
+          movies.where("runtime_in_minutes >= ? AND runtime_in_minutes <= ?", 90, 120)
+        when "over120"
+          movies.where("runtime_in_minutes > ?", 120)
+      end
+    else
+      movies
+    end
+  end
+
   protected
 
   def release_date_is_in_the_future

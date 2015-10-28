@@ -1,9 +1,34 @@
     class MoviesController < ApplicationController
 
       def index
-        @movies = Movie.all
-      end
 
+        @movies = Movie.all
+
+        # if params[:title] != nil
+        #   @movies = @movies.where("title like ?", "%#{params[:title]}%")
+        # end
+        
+        # if params[:director] != nil
+        #   @movies = @movies.where("director like ?", "%#{params[:director]}%")
+        # end
+
+        @movies = @movies.search_title(@movies, params[:title])
+        @movies = @movies.search_director(@movies, params[:director])
+        @movies = @movies.filter_by_runtime(@movies, params[:runtime])
+
+        # if params[:runtime] != nil
+        #   case params[:runtime]
+        #     when "under90"
+        #       @movies = @movies.where("runtime_in_minutes < ?", 90)
+        #     when "between90and120"
+        #       @movies = @movies.where("runtime_in_minutes >= ? AND runtime_in_minutes <= ?", 90, 120)
+        #     when "over120"
+        #       @movies = @movies.where("runtime_in_minutes > ?", 120)
+        #   end
+        # end
+ 
+      end
+     
       def show
         @movie = Movie.find(params[:id])
       end
