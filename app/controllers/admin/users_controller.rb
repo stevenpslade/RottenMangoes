@@ -18,7 +18,7 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       if @user.destroy
-        # Tell the UserMailer to send a welcome email after save
+        # Tell the UserMailer to send a goodbye email after save
         UserMailer.goodbye_email(@user).deliver_now
  
         format.html { redirect_to(admin_users_path, notice: "#{@user.firstname} was successfully deleted.") }
