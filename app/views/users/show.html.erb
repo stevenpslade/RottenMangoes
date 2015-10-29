@@ -4,7 +4,6 @@
 <% if @user.admin %>
   <p>Administrator</p>
 <% end %>
-<p>Created: <%= @user.created_at %></p>
 <h3><%= @user.firstname %>'s Reviews</h3>
 <hr/>
 <% @user.reviews.each do |review| %>
