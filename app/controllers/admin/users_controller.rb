@@ -14,7 +14,16 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to admin_users_path
+    # redirect_to admin_users_path
+
+    respond_to do |format|
+      if @user.destroy
+        # Tell the UserMailer to send a welcome email after save
+        UserMailer.goodbye_email(@user).deliver_now
+ 
+        format.html { redirect_to(admin_users_path, notice: "#{@user.firstname} was successfully deleted.") }
+      end
+    end
   end
 
 end
