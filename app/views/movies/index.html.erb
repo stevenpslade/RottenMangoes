@@ -4,11 +4,8 @@
   <h3>Search</h3>
   <%= form_tag movies_path, method: "get" do %>
     <!-- Search for title -->
-    <%= label_tag(:title, "Title:") %>
-    <%= text_field_tag(:title) %>
-    <!-- Search for Director -->
-    <%= label_tag(:director, "Director:") %>
-    <%= text_field_tag(:director) %>
+    <%= label_tag(:keyword, "Keyword:") %>
+    <%= text_field_tag(:keyword) %>
     <!-- Drop down search for runtime -->
     <%= select_tag(:runtime, options_for_select([["", nil],["Under 90 minutes", "under90"], ["Between 90 and 120 minutes", "between90and120"], ["Over 120 minutes", "over120"]])) %>
     <%= submit_tag("Search") %>
