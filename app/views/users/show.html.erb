@@ -7,7 +7,7 @@
 <h3><%= @user.firstname %>'s Reviews</h3>
 <hr/>
 <% @user.reviews.each do |review| %>
-  <p>Movie: <%= review.movie.title %></p>
+  <p>Movie: <%= link_to review.movie.title, movie_path(review.movie) %></p>
   <p><%= review.text %></p>
   <p><%= review.rating_out_of_ten %>/10</p>
   <hr/>
