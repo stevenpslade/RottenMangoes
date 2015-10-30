@@ -29,19 +29,6 @@ class Movie < ActiveRecord::Base
     end
   end
 
-  # def self.search_title(title)
-  #   return all if title.blank? #implicit returns
-  #   where("title like ?", "%#{title}%")
-  # end
-
-  # def self.search_director(director)
-  #   if !director.blank?
-  #     where("director like ?", "%#{director}%")
-  #   else
-  #     all  # don't apply any filters
-  #   end
-  # end
-
   def self.search_all(keyword)
     if !keyword.blank?
       where("director like ? OR title like ?", "%#{keyword}%", "%#{keyword}%")
