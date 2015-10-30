@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
 
   before_filter :restrict_access
-  before_filter :admins_only
+  # before_filter :admins_only
 
   def index
     @users = User.all.page(params[:page]).per(10)
@@ -52,6 +52,18 @@ class Admin::UsersController < ApplicationController
         format.html { redirect_to(admin_users_path, notice: "#{@user.firstname} was successfully deleted.") }
       end
     end
+  end
+
+  def impersonate
+    session[:admin_user_id] = current_user.id 
+    session[:user_id] = params[:id]
+    redirect_to :root
+  end
+
+  def restore
+    session[:user_id] = session[:admin_user_id] 
+    session[:admin_user_id] = nil
+    redirect_to :root
   end
 
   def user_params

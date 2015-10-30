@@ -27,6 +27,10 @@ class ApplicationController < ActionController::Base
     current_user.admin
   end
 
-  helper_method :current_user, :admin?
+  def really_an_admin?
+    session[:admin_user_id]
+  end
+
+  helper_method :current_user, :admin?, :really_an_admin?
 
 end
