@@ -9,7 +9,13 @@ RottenMangoes::Application.routes.draw do
     root to: 'movies#index'
 
     namespace :admin do
-      resources :users
+      resources :users do
+        post :impersonate, on: :member
+        post :restore, on: :collection
+        # post :batch_delete, on: :collection
+      end
+      # post '/users/:id', to: 'users#switch_to_user', as: 'switch_to_user'
+      # get '/re-log', to: 'users#login_back_to_admin', as: 'login_back_to_admin'
     end
 
     end

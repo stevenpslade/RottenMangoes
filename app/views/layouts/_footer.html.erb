@@ -3,7 +3,7 @@
     <% if current_user && admin? %>
       Signed in as <%= current_user.full_name %> | <%= link_to "Admin Page", admin_users_path %> | (<%= link_to "Log out", session_path("current"), method: :delete %>)
     <% elsif current_user %>
-      Signed in as <%= current_user.full_name %> (<%= link_to "Log out", session_path("current"), method: :delete %>)
+      Signed in as <%= current_user.full_name %> (<%= link_to "Log out", session_path("current"), method: :delete %>) <% if really_an_admin? %>| <%= link_to "Back to Admin", restore_admin_users_path, method: :post %><% end %>
     <% else %>
       <%= link_to "Log In", new_session_path %> | <%= link_to "Sign Up", new_user_path %>
     <% end %>
