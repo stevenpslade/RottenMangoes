@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def admins_only
-    if !admin?
+    if !(admin? || really_an_admin?)
       flash[:alert] = "You must be an admin."
       redirect_to movies_path
     end
